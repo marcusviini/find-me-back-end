@@ -12,3 +12,4 @@ export * from './Customer/FindAll/FindAll.implementation'
 
 // ORDER SERVICE IMPLEMENTATION
 export * from './OrderService/Create/Create.implementation'
+export * from './OrderService/FindByCustomer/FindByCustomer.implementation'

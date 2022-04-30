@@ -11,3 +11,4 @@ export * from './Customer/FindAll/DbFindAll.data'
 
 // O.S FUNCTIONS
 export * from './OrderService/Create/DbCreate.data'
+export * from './OrderService/FindByCustomer/DbFindByCustomer.data'

@@ -13,6 +13,10 @@ export class OrderServiceRepository {
         return await OrderService.findOne({ nome })
     }
 
+    async findOrderServiceByCustomer(clienteId) {
+        return await OrderService.find({ clienteId })
+    }
+
     async findAll() {
         return await OrderService.find()
     }

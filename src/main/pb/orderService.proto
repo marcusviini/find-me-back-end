@@ -23,7 +23,19 @@ message CreateOrderServiceResponse {
     string error = 2;
 }
 
+message FindOrderServiceByCustomerRequest {
+    int32 clienteId = 1;
+}
+
+message FindOrderServiceByCustomerResponse {
+    string message = 1;
+    repeated OrderService os = 2;
+    string error = 3;
+}
+
+
 
 service orderServiceService {
     rpc  create (CreateOrderServiceRequest) returns (CreateOrderServiceResponse);
+    rpc  findByCustomer (FindOrderServiceByCustomerRequest) returns (FindOrderServiceByCustomerResponse);
 }

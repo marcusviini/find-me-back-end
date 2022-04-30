@@ -10,6 +10,7 @@ import {
     FindCustomerImplementation,
     FindAllCustomerImplementation,
     CreateOrderServiceImplementation,
+    FindByCustomerOrderServiceImplementation,
 } from '../presentation/implementation'
 
 import {
@@ -21,6 +22,7 @@ import {
     DbFindCustomer,
     DbFindAllCustomer,
     DbCreateOrderService,
+    DbFindByCustomer,
 } from '../data'
 
 import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
@@ -186,8 +188,20 @@ const createOrderServiceImplementation = () => {
     })
 }
 
+const findByCustomerOrderServiceImplementation = () => {
+    const orderServiceRepository = new OrderServiceRepository()
+
+    const dbFindByCustomer = new DbFindByCustomer({
+        orderServiceRepository,
+    })
+    return new FindByCustomerOrderServiceImplementation({
+        dbFindByCustomer,
+    })
+}
+
 server.addService(proto[2].service.orderServiceService, {
     create: adapter(createOrderServiceImplementation()),
+    findByCustomer: adapter(findByCustomerOrderServiceImplementation()),
 })
 
 server.bind(
