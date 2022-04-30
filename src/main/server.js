@@ -6,13 +6,23 @@ import {
     SignInImplementation,
     SendTokenImplementation,
     ResetPasswordImplementation,
+    CreateCustomerImplementation,
 } from '../presentation/implementation'
 
-import { DbSignUp, DbSignIn, DbSendToken, DbResetPassword } from '../data'
+import {
+    DbSignUp,
+    DbSignIn,
+    DbSendToken,
+    DbResetPassword,
+    DbCreateCustomer,
+} from '../data'
 
 import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
 
-import { UserRepository } from '../infra/database/repositories'
+import {
+    UserRepository,
+    CustomerRepository,
+} from '../infra/database/repositories'
 
 import { adapter } from './adapter/Grpc.adapter'
 
@@ -30,7 +40,18 @@ const packageUser = protoLoader.loadSync(
     }
 )
 
-const proto = grpc.loadPackageDefinition([packageUser])
+const packageCustomer = protoLoader.loadSync(
+    path.resolve(__dirname, 'pb', 'customer.proto'),
+    {
+        keepCase: true,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true,
+    }
+)
+
+const proto = grpc.loadPackageDefinition([packageUser, packageCustomer])
 
 const server = new grpc.Server()
 
@@ -87,6 +108,21 @@ server.addService(proto[0].service.userService, {
     signIn: adapter(signInImplementation()),
     sendToken: adapter(sendTokenImplementation()),
     resetPassword: adapter(resetPasswordImplementation()),
+})
+
+const createCustomerImplementation = () => {
+    const customerRepository = new CustomerRepository()
+
+    const dbCreateCustomer = new DbCreateCustomer({
+        customerRepository,
+    })
+    return new CreateCustomerImplementation({
+        dbCreateCustomer,
+    })
+}
+
+server.addService(proto[1].service.customerService, {
+    create: adapter(createCustomerImplementation()),
 })
 
 server.bind(
