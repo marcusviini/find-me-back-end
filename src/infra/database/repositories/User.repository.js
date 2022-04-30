@@ -1,5 +1,5 @@
 import User from '../schemas/User'
-import { CryptoAdapter } from '../../adapter/cripto.adapter'
+import { CryptoAdapter } from '../../adapter'
 
 const cryptoAdapter = new CryptoAdapter()
 

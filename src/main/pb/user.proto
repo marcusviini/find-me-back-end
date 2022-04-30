@@ -9,9 +9,24 @@ message SignUpRequest {
 
 message SignUpResponse {
     string message = 1;
-    string error = 3;
+    string error = 2;
 }
+
+message SignInRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message SignInResponse {
+    string message = 1;
+    string nome = 2;
+    string avatar = 3;
+    string token = 4;
+    string error = 5;
+}
+
 
 service userService {
     rpc  signUp (SignUpRequest) returns (SignUpResponse);
+    rpc  signIn (SignInRequest) returns (SignInResponse);
 }

@@ -1,9 +1,14 @@
 import path from 'path'
 import grpc from 'grpc'
 import * as protoLoader from '@grpc/proto-loader'
-import { SignUpImplementation } from '../presentation/implementation'
+import {
+    SignUpImplementation,
+    SignInImplementation,
+} from '../presentation/implementation'
 
-import { DbSignUp } from '../data'
+import { DbSignUp, DbSignIn } from '../data'
+
+import { CryptoAdapter, JwtAdapter } from '../infra/adapter'
 
 import { UserRepository } from '../infra/database/repositories'
 
@@ -37,8 +42,23 @@ const signUpImplementation = () => {
     })
 }
 
+const signInImplementation = () => {
+    const userRepository = new UserRepository()
+    const cryptoAdapter = new CryptoAdapter()
+    const jwtAdapter = new JwtAdapter()
+    const dbSignIn = new DbSignIn({
+        userRepository,
+        cryptoAdapter,
+        jwtAdapter,
+    })
+    return new SignInImplementation({
+        dbSignIn,
+    })
+}
+
 server.addService(proto[0].service.userService, {
     signUp: adapter(signUpImplementation()),
+    signIn: adapter(signInImplementation()),
 })
 
 server.bind(

@@ -1,11 +1,11 @@
-export class SignUpImplementation {
-    constructor({ dbSignUp }) {
-        this.dbSignUp = dbSignUp
+export class SignInImplementation {
+    constructor({ dbSignIn }) {
+        this.dbSignIn = dbSignIn
     }
 
     async handle(call) {
         try {
-            const response = await this.dbSignUp.execute(call.request)
+            const response = await this.dbSignIn.execute(call.request)
 
             if (response.error)
                 return {
