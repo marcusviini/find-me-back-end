@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt'
 
 const User = new mongoose.Schema(
     {
+        id: {
+            type: Number,
+            required: false,
+        },
         nome: {
             type: String,
             required: true,
@@ -32,6 +36,15 @@ const User = new mongoose.Schema(
         timestamps: true,
     }
 )
+
+User.pre('save', function (next) {
+    if (this.isNew) {
+        this.constructor.find({}).then((result) => {
+            this.id = result.length + 1
+            next()
+        })
+    }
+})
 
 User.pre('save', function (next) {
     const user = this
