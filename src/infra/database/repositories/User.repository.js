@@ -5,7 +5,6 @@ const cryptoAdapter = new CryptoAdapter()
 
 export class UserRepository {
     async create(data) {
-        data.password = await cryptoAdapter.createHashPassword(data.password)
         return await User.create(data)
     }
 
