@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+
+message SingUpRequest {
+    string nome = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message SingUpResponse {
+    string message = 1;
+    string error = 3;
+}
+
+service userService {
+    rpc  singUp (SingUpRequest) returns (SingUpResponse);
+}
