@@ -4,11 +4,12 @@ import * as protoLoader from '@grpc/proto-loader'
 import {
     SignUpImplementation,
     SignInImplementation,
+    SendTokenImplementation,
 } from '../presentation/implementation'
 
-import { DbSignUp, DbSignIn } from '../data'
+import { DbSignUp, DbSignIn, DbSendToken } from '../data'
 
-import { CryptoAdapter, JwtAdapter } from '../infra/adapter'
+import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
 
 import { UserRepository } from '../infra/database/repositories'
 
@@ -56,9 +57,22 @@ const signInImplementation = () => {
     })
 }
 
+const sendTokenImplementation = () => {
+    const userRepository = new UserRepository()
+    const mailAdapter = new MailAdapter()
+    const dbSendToken = new DbSendToken({
+        userRepository,
+        mailAdapter,
+    })
+    return new SendTokenImplementation({
+        dbSendToken,
+    })
+}
+
 server.addService(proto[0].service.userService, {
     signUp: adapter(signUpImplementation()),
     signIn: adapter(signInImplementation()),
+    sendToken: adapter(sendTokenImplementation()),
 })
 
 server.bind(

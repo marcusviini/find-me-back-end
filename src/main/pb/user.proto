@@ -25,8 +25,18 @@ message SignInResponse {
     string error = 5;
 }
 
+message SendTokenRequest {
+    string email = 1;
+}
+
+message SendTokenResponse {
+    string message = 1;
+    string error = 2;
+}
+
 
 service userService {
     rpc  signUp (SignUpRequest) returns (SignUpResponse);
     rpc  signIn (SignInRequest) returns (SignInResponse);
+    rpc  sendToken (SendTokenRequest) returns (SendTokenResponse);
 }
