@@ -6,6 +6,10 @@ const OrderService = new mongoose.Schema(
             type: Number,
             required: false,
         },
+        latitude: {
+            type: String,
+            required: true,
+        },
         cliente: {
             type: String,
             required: true,

@@ -8,12 +8,14 @@ message OrderService {
     bool encerrada = 5;
     string createdAt = 6;
     string updatedAt = 7;
+    string latitude = 8;
 }
 
 message CreateOrderServiceRequest {
     int32 clienteId = 1;
     string problema = 2;
     int32 responsavelId = 3;
+    string latitude = 4;
 }
 
 message CreateOrderServiceResponse {

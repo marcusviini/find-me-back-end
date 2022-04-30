@@ -10,7 +10,7 @@ export class DbCreateOrderService {
     }
 
     async execute(Data) {
-        const { clienteId, problema, responsavelId } = Data
+        const { clienteId, problema, responsavelId, latitude } = Data
 
         const findCustomer = await this.customerRepository.findCustomerById(
             clienteId
@@ -36,6 +36,7 @@ export class DbCreateOrderService {
             problema,
             responsavel: findUser.nome,
             responsavelId,
+            latitude,
         })
 
         return {
