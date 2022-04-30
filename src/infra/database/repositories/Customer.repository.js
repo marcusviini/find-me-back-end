@@ -9,8 +9,10 @@ export class CustomerRepository {
         return await Customer.findByIdAndUpdate({ _id }, data)
     }
 
-    async findCustomer(data) {
-        return await Customer.findOne(data)
+    async findCustomer(nome) {
+        return await Customer.find({
+            nome: { $regex: `.*${nome}.*` },
+        }).limit(5)
     }
 
     async findAll() {

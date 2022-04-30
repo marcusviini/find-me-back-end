@@ -7,6 +7,7 @@ import {
     SendTokenImplementation,
     ResetPasswordImplementation,
     CreateCustomerImplementation,
+    FindCustomerImplementation,
 } from '../presentation/implementation'
 
 import {
@@ -15,6 +16,7 @@ import {
     DbSendToken,
     DbResetPassword,
     DbCreateCustomer,
+    DbFindCustomer,
 } from '../data'
 
 import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
@@ -121,8 +123,20 @@ const createCustomerImplementation = () => {
     })
 }
 
+const findCustomerImplementation = () => {
+    const customerRepository = new CustomerRepository()
+
+    const dbFindCustomer = new DbFindCustomer({
+        customerRepository,
+    })
+    return new FindCustomerImplementation({
+        dbFindCustomer,
+    })
+}
+
 server.addService(proto[1].service.customerService, {
     create: adapter(createCustomerImplementation()),
+    find: adapter(findCustomerImplementation()),
 })
 
 server.bind(

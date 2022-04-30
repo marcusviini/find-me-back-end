@@ -7,3 +7,4 @@ export * from './User/ResetPassword/ResetPassword.implementation'
 
 // CUSTOMER IMPLEMENTATION
 export * from './Customer/Create/Create.implementation'
+export * from './Customer/Find/Find.implementation'
