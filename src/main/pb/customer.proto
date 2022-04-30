@@ -1,8 +1,8 @@
 syntax = "proto3";
 
 message Customer {
-    string nome = 1;
-    int32 id = 2;
+    int32 id = 1;
+    string nome = 2;
 }
 
 message CreateCustomerRequest {
