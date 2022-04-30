@@ -34,9 +34,22 @@ message SendTokenResponse {
     string error = 2;
 }
 
+message ResetPasswordRequest {
+    string email = 1;
+    string token = 2;
+    string password = 3;
+}
+
+message ResetPasswordResponse {
+    string message = 1;
+    string error = 2;
+}
+
+
 
 service userService {
     rpc  signUp (SignUpRequest) returns (SignUpResponse);
     rpc  signIn (SignInRequest) returns (SignInResponse);
     rpc  sendToken (SendTokenRequest) returns (SendTokenResponse);
+    rpc  resetPassword (ResetPasswordRequest) returns (ResetPasswordResponse);
 }

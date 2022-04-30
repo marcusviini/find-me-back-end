@@ -5,9 +5,10 @@ import {
     SignUpImplementation,
     SignInImplementation,
     SendTokenImplementation,
+    ResetPasswordImplementation,
 } from '../presentation/implementation'
 
-import { DbSignUp, DbSignIn, DbSendToken } from '../data'
+import { DbSignUp, DbSignIn, DbSendToken, DbResetPassword } from '../data'
 
 import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
 
@@ -69,10 +70,23 @@ const sendTokenImplementation = () => {
     })
 }
 
+const resetPasswordImplementation = () => {
+    const userRepository = new UserRepository()
+    const cryptoAdapter = new CryptoAdapter()
+    const dbResetPassword = new DbResetPassword({
+        userRepository,
+        cryptoAdapter,
+    })
+    return new ResetPasswordImplementation({
+        dbResetPassword,
+    })
+}
+
 server.addService(proto[0].service.userService, {
     signUp: adapter(signUpImplementation()),
     signIn: adapter(signInImplementation()),
     sendToken: adapter(sendTokenImplementation()),
+    resetPassword: adapter(resetPasswordImplementation()),
 })
 
 server.bind(
