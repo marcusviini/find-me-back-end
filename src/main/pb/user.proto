@@ -1,17 +1,17 @@
 syntax = "proto3";
 
 
-message SingUpRequest {
+message SignUpRequest {
     string nome = 1;
     string email = 2;
     string password = 3;
 }
 
-message SingUpResponse {
+message SignUpResponse {
     string message = 1;
     string error = 3;
 }
 
 service userService {
-    rpc  singUp (SingUpRequest) returns (SingUpResponse);
+    rpc  signUp (SignUpRequest) returns (SignUpResponse);
 }
