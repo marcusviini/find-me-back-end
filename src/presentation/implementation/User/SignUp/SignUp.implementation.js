@@ -14,6 +14,7 @@ export class SignUpImplementation {
 
             return response
         } catch (error) {
+            console.log(error)
             return {
                 error: 'Ocorreu um problema interno, tente novamente ou fale com o suporte',
             }
