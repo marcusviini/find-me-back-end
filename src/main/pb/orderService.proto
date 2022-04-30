@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+message OrderService {
+    int32 id = 1;
+    string cliente = 2;
+    string problema = 3;
+    string responsavel = 4;
+    bool encerrada = 5;
+    string createdAt = 6;
+    string updatedAt = 7;
+}
+
+message CreateOrderServiceRequest {
+    int32 clienteId = 1;
+    string problema = 2;
+    int32 responsavelId = 3;
+}
+
+message CreateOrderServiceResponse {
+    string message = 1;
+    string error = 2;
+}
+
+
+service orderServiceService {
+    rpc  create (CreateOrderServiceRequest) returns (CreateOrderServiceResponse);
+}

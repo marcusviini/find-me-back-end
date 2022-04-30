@@ -13,6 +13,10 @@ export class CustomerRepository {
         return await Customer.findOne({ nome })
     }
 
+    async findCustomerById(id) {
+        return await Customer.findOne({ id })
+    }
+
     async findCustomer(nome) {
         return await Customer.find({
             nome: { $regex: `.*${nome}.*` },

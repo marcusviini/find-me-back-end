@@ -4,7 +4,10 @@ export * from './User/SignIn/DbSignIn.data'
 export * from './User/ResetPassword/DbSendToken.data'
 export * from './User/ResetPassword/DbResetPassword.data'
 
-// CUSTO FUNCTIONS
+// CUSTOMER FUNCTIONS
 export * from './Customer/Create/DbCreate.data'
 export * from './Customer/Find/DbFind.data'
 export * from './Customer/FindAll/DbFindAll.data'
+
+// O.S FUNCTIONS
+export * from './OrderService/Create/DbCreate.data'

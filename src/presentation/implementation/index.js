@@ -9,3 +9,6 @@ export * from './User/ResetPassword/ResetPassword.implementation'
 export * from './Customer/Create/Create.implementation'
 export * from './Customer/Find/Find.implementation'
 export * from './Customer/FindAll/FindAll.implementation'
+
+// ORDER SERVICE IMPLEMENTATION
+export * from './OrderService/Create/Create.implementation'

@@ -2,13 +2,13 @@ import mongoose from 'mongoose'
 
 const Customer = new mongoose.Schema(
     {
-        nome: {
-            type: String,
-            required: true,
-        },
         id: {
             type: Number,
             required: false,
+        },
+        nome: {
+            type: String,
+            required: true,
         },
     },
     {

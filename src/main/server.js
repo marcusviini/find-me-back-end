@@ -9,6 +9,7 @@ import {
     CreateCustomerImplementation,
     FindCustomerImplementation,
     FindAllCustomerImplementation,
+    CreateOrderServiceImplementation,
 } from '../presentation/implementation'
 
 import {
@@ -19,6 +20,7 @@ import {
     DbCreateCustomer,
     DbFindCustomer,
     DbFindAllCustomer,
+    DbCreateOrderService,
 } from '../data'
 
 import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
@@ -26,6 +28,7 @@ import { CryptoAdapter, JwtAdapter, MailAdapter } from '../infra/adapter'
 import {
     UserRepository,
     CustomerRepository,
+    OrderServiceRepository,
 } from '../infra/database/repositories'
 
 import { adapter } from './adapter/Grpc.adapter'
@@ -55,7 +58,22 @@ const packageCustomer = protoLoader.loadSync(
     }
 )
 
-const proto = grpc.loadPackageDefinition([packageUser, packageCustomer])
+const packageOrderService = protoLoader.loadSync(
+    path.resolve(__dirname, 'pb', 'orderService.proto'),
+    {
+        keepCase: true,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true,
+    }
+)
+
+const proto = grpc.loadPackageDefinition([
+    packageUser,
+    packageCustomer,
+    packageOrderService,
+])
 
 const server = new grpc.Server()
 
@@ -151,6 +169,25 @@ server.addService(proto[1].service.customerService, {
     create: adapter(createCustomerImplementation()),
     find: adapter(findCustomerImplementation()),
     findAll: adapter(findAllCustomerImplementation()),
+})
+
+const createOrderServiceImplementation = () => {
+    const customerRepository = new CustomerRepository()
+    const userRepository = new UserRepository()
+    const orderServiceRepository = new OrderServiceRepository()
+
+    const dbCreateOrderService = new DbCreateOrderService({
+        customerRepository,
+        orderServiceRepository,
+        userRepository,
+    })
+    return new CreateOrderServiceImplementation({
+        dbCreateOrderService,
+    })
+}
+
+server.addService(proto[2].service.orderServiceService, {
+    create: adapter(createOrderServiceImplementation()),
 })
 
 server.bind(

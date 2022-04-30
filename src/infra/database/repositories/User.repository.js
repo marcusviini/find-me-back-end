@@ -18,6 +18,10 @@ export class UserRepository {
         return await User.findByIdAndUpdate({ _id }, data)
     }
 
+    async findUserById(id) {
+        return await User.findOne({ id })
+    }
+
     async findUser(data) {
         return await User.findOne(data)
     }

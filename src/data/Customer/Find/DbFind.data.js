@@ -10,7 +10,7 @@ export class DbFindCustomer {
 
         if (!findCustomer) {
             return {
-                error: 'Cliente não  encontrado',
+                error: 'Cliente não encontrado',
             }
         }
 
