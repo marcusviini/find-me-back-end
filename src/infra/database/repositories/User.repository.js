@@ -23,10 +23,6 @@ export class UserRepository {
         return await User.findOne(data)
     }
 
-    async findUserByCpf(data) {
-        return await User.findOne(data)
-    }
-
     async findAll() {
         return await User.find()
     }
