@@ -1,0 +1,9 @@
+node_modules
+.env
+deploy
+coverage
+yarn.lock
+.vscode
+.vscode/launch.json
+*.png
+*.txt
