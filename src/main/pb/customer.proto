@@ -26,8 +26,20 @@ message FindCustomerResponse {
 }
 
 
+message FindAllCustomerRequest {
+
+}
+
+message FindAllCustomerResponse {
+    string message = 1;
+    repeated Customer customers = 2;
+    string error = 3;
+}
+
+
 
 service customerService {
     rpc  create (CreateCustomerRequest) returns (CreateCustomerResponse);
     rpc  find (FindCustomerRequest) returns (FindCustomerResponse);
+    rpc  findAll (FindAllCustomerRequest) returns (FindAllCustomerResponse);
 }

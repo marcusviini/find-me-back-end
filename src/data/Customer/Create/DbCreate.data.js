@@ -6,9 +6,7 @@ export class DbCreateCustomer {
     async execute(Data) {
         const { nome } = Data
 
-        const findCustomer = await this.customerRepository.findCustomer({
-            nome,
-        })
+        const findCustomer = await this.customerRepository.findOneCustomer(nome)
 
         if (findCustomer) {
             return {

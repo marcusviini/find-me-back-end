@@ -7,3 +7,4 @@ export * from './User/ResetPassword/DbResetPassword.data'
 // CUSTO FUNCTIONS
 export * from './Customer/Create/DbCreate.data'
 export * from './Customer/Find/DbFind.data'
+export * from './Customer/FindAll/DbFindAll.data'
