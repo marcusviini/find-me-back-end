@@ -1,5 +1,10 @@
 syntax = "proto3";
 
+message localizacao {
+    string latitude = 1;
+    string longitude = 2;
+}
+
 message OrderService {
     int32 id = 1;
     string cliente = 2;
@@ -15,7 +20,7 @@ message CreateOrderServiceRequest {
     int32 clienteId = 1;
     string problema = 2;
     int32 responsavelId = 3;
-    string latitude = 4;
+    localizacao localizacao = 4;
 }
 
 message CreateOrderServiceResponse {
