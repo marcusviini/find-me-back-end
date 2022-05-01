@@ -13,7 +13,7 @@ export class DbSendToken {
 
         if (!findUserByEmail) {
             return {
-                error: 'Usuário nao encontrado',
+                error: 'Usuário não encontrado',
             }
         }
 

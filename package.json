@@ -1,9 +1,9 @@
 {
     "name": "backend",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "author": "author",
+    "description": "back end",
+    "main": "server.js",
+    "author": "https://github.com/marcusviin",
     "license": "ISC",
     "scripts": {
         "copy:unix": "cp -r -u ./src/main/pb/* ./deploy/main/pb",
