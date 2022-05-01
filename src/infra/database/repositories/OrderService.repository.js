@@ -17,6 +17,10 @@ export class OrderServiceRepository {
         return await OrderService.find({ clienteId })
     }
 
+    async findOrderServiceByUser(responsavelId) {
+        return await OrderService.find({ responsavelId })
+    }
+
     async findAll() {
         return await OrderService.find()
     }

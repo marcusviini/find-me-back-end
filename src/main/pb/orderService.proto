@@ -33,9 +33,18 @@ message FindOrderServiceByCustomerResponse {
     string error = 3;
 }
 
+message FindOrderServiceByUserRequest {
+    int32 userId = 1;
+}
 
+message FindOrderServiceByUserResponse {
+    string message = 1;
+    repeated OrderService os = 2;
+    string error = 3;
+}
 
 service orderServiceService {
     rpc  create (CreateOrderServiceRequest) returns (CreateOrderServiceResponse);
     rpc  findByCustomer (FindOrderServiceByCustomerRequest) returns (FindOrderServiceByCustomerResponse);
+    rpc  findByUser (FindOrderServiceByUserRequest) returns (FindOrderServiceByUserResponse);
 }
